@@ -2,15 +2,20 @@
   <div>
     {{ msg }}
     <form>
-      <button>ADD TASK</button>
-      <button>DELETE FINISHED TASKS</button>
-      <p>input: <input type="text"></p>
-      <p>task:</p>
+      <button v-on:click="addTodo()">ADD TASK</button>
+      <button @click="removeTodo()">DELETE FINISHED TASKS</button>
+      <p>input: <input type="text" v-model="newTodo"></p>
+      <p>task: {{ newTodo }}</p>
     </form>
     <div class="task-list">
       <label class="task-list__item"
-             v-for="todo in todos" :key="todo.text">
-        <input type="checkbox"><button>EDIT</button>{{ todo.text }}
+             v-for="todo in todos" 
+             v-bind:class="{ 'task-list__item--checked': todo.done }"
+             :key="todo.text">
+        <input type="checkbox" v-model="todo.done">
+        <input type="checkbox" v-model="todo.editing">
+        <input v-if="todo.editing" v-model="todo.text" @keyup.enter="todo.editing = !todo.editing">
+        <span v-else>{{ todo.text }}</span>
       </label>
     </div>
   </div>
@@ -25,12 +30,32 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       todos : [
-        {text : 'vue-router', done: false},
-        {text : 'vuex', done: false},
-        {text : 'vue-loader', done: false},
-        {text : 'awesome-vue', done: true },
-      ]
+        {text : 'vue-router', done: false, editing: false},
+        {text : 'vuex', done: false, editing: false},
+        {text : 'vue-loader', done: false, editing: false},
+        {text : 'awesome-vue', done: true, editing: false},
+      ],
+       newTodo: ""
     }
+  },
+  methods: {
+    addTodo: function(event) { // eslint-disable-line
+      let text = this.newTodo && this.newTodo.trim()
+      if (!text) {
+        return
+      }
+      this.todos.push({
+        text: text,
+        done: false,
+        editing: false
+      })
+      this.newTodo = ''
+    },
+    removeTodo: function (event) { // eslint-disable-line
+      for (let i = this.todos.length - 1; i >= 0; i--) {
+        if (this.todos[i].done) this.todos.splice(i, 1)
+      }
+    },
   }
 }
 </script>
