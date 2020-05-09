@@ -41,6 +41,11 @@ npm -v
 vue -V
 @vue/cli 4.3.1
 
-
 ## リポジトリはこちら
-https://github.com/kuimac/vue_todo_app
+https://github.com/kuimac/vue_todo_app.io
+
+
+![buiild先を変えるのはこれで行けるか？](https://rarejob-tech-dept.hatenablog.com/entry/2019/07/12/190000)
+
+vue.donfig.js
+`outputDir: 'dist/',`
