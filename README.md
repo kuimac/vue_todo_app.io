@@ -44,8 +44,11 @@ vue -V
 ## リポジトリはこちら
 https://github.com/kuimac/vue_todo_app.io
 
+GitHub Pagesはこちら
+https://kuimac.github.io/vue_todo_app.io/
 
-![buiild先を変えるのはこれで行けるか？](https://rarejob-tech-dept.hatenablog.com/entry/2019/07/12/190000)
+
+![buiild先を変えるのはこれでいけた](https://rarejob-tech-dept.hatenablog.com/entry/2019/07/12/190000)
 
 vue.donfig.js
 `outputDir: 'dist/',`
